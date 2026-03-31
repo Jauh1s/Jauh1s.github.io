@@ -1,56 +1,146 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Store</title>
+<link rel="icon" type="image/png" href="kakka.png">
+<style>
+body { font-family: Arial, sans-serif; margin: 0; background: #000; color: #fff; }
 
-  <title>Welcome to to Air store</title>
+header {
+  background:#000;
+  padding:1rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header nav a {
+  color:#fff; margin:0 1rem; text-decoration:none; font-weight:bold;
+}
+header nav a:hover { text-decoration: underline; }
 
-  <!-- TITLE LOGO / FAVICON -->
-  <link rel="icon" type="image/png" href="kakka.png">
+/* Cart count */
+#cart-count { font-weight:bold; }
 
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #000000; }
-    header { background: #000; color: #066; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    header nav a { color: #066; margin: 0 1rem; text-decoration: none; font-weight: bold; }
-    header nav a:hover { text-decoration: underline; }
-    .container { max-width: 1400px; margin: auto; padding: 2rem; }
-    .products { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; }
-    .card { background: #000; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .card:hover { transform: scale(1.02); }
-    .card img { width: 100%; border-radius: 6px; }
-    .card h3 { margin: 0.5rem 0; color: #0fc; }
-    .card p { color: #000; }
-    .card button { background: #355; color: #000; border: none; padding: 0.6rem; width: 100%; cursor: pointer; border-radius: 4px; margin-top: 0.5rem; }
-    .card button:hover { background: #0fc; }
-    .cart { margin-top: 2rem; background: #355; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .cart-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #fff; }
-    footer { text-align: center; padding: 1.5rem; background: #355; color: #000; margin-top: 2rem; }
-  </style>
+/* HERO */
+#home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+  background: url('xxz7791.jpg') center/cover no-repeat;
+}
+.hero-text {
+  color: #000;
+  text-align: center;
+  transform: translateY(-190%);
+}
+.hero-text h1, .hero-text p {
+  text-shadow: 0 0 10px rgba(255,255,255,0.7);
+}
+
+/* STORE */
+#store.highlight { background-color: rgba(0,0,0,0.5); transition: background-color 0.3s; }
+.products { display:grid; grid-template-columns:repeat(5,1fr); gap:2rem; padding: 0 2rem; }
+.card { background:#000; padding:1rem; }
+.card img { width:100%; }
+.card h3 { color:#fff; }
+.card p { color:#ccc; }
+.card button {
+  width:100%;
+  background:#fff;
+  color:#000;
+  border:none;
+  padding:0.6rem;
+  cursor:pointer;
+}
+
+/* CART FULL WIDTH */
+.cart, #checkout {
+  width: 90%;              /* valkoinen reunus ei tartu suoraan ruudun reunoihin */
+  max-width: 6500px;       /* maksimi leveys */
+  margin: 0 auto;          /* keskitys */
+  background: #000;        /* musta tausta */
+  border: 2px solid #fff;  /* valkoinen reunus */
+  padding: 1.5rem;
+  box-sizing: border-box;  /* sisältää paddingin reunoissa */
+  border-radius: 8px;      /* halutessasi pyöristetyt kulmat */
+}
+
+.cart-item {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  flex-wrap: wrap;
+  border-bottom:1px solid #444;
+  padding:0.5rem 0;
+}
+
+.cart-item span { 
+  flex: 1 1 auto; 
+  min-width: 0; 
+  margin-right:10px; 
+  word-break: break-word;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 10px;
+}
+
+.qty-controls button {
+  background:#fff; color:#000; border:none; padding:2px 6px; cursor:pointer;
+}
+
+.remove-btn {
+  flex: 0 0 auto;
+  background:#000; color:#fff; border:1px solid #fff;
+  padding:4px 8px; cursor:pointer;
+  white-space: nowrap;
+  margin-left:5px; /* pieni väli että ei tartu muihin */
+}
+
+/* CHECKOUT */
+.checkout-form {
+  max-width:400px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+.checkout-form input { padding:0.5rem; border:none; width:100%; box-sizing:border-box; }
+.pay-btn { background:#fff; color:#000; padding:0.8rem; border:none; cursor:pointer; }
+
+footer { text-align:center; padding:1.5rem; }
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>Air Store</h1>
-    <nav>
-      <a href="#home" onclick="showSection('home')">Home</a>
-      <a href="#store" onclick="showSection('store')">Store</a>
-      <a href="#cart" onclick="showSection('cart')">Cart</a>
-    </nav>
-  </header>
+<header>
+<h1>Air Store</h1>
+<nav>
+  <a href="#" onclick="showSection('home')">Home</a>
+  <a href="#" onclick="showSection('store')">Store</a>
+  <a href="#" onclick="showSection('cart')">Cart (<span id="cart-count">0</span>)</a>
+</nav>
+</header>
 
-  <div class="container">
-    <!-- Home Section -->
-    <section id="home">
-      <h2>Welcome to Air store</h2>
-      <p>Discover our latest products and find your style. This is a demo site - no payment methods have been added!</p>
-    </section>
+<!-- HOME -->
+<section id="home" class="hero">
+  <div class="hero-text">
+    <h1>Welcome to Air Store</h1>
+    <p>Discover our latest products</p>
+  </div>
+</section>
 
-    <!-- Store Section -->
-    <section id="store" style="display:none;">
-      <h2>Tuotteet</h2>
-      <div class="products">
-        <!-- Row 1 -->
+<!-- STORE -->
+<section id="store" style="display:none;">
+  <h2 style="padding:0 2rem;">Store</h2>
+  <div class="products">
+    <!-- Row 1 -->
         <div class="card"><img src="lataus.jpg" alt="Air 1" /><h3>Air 1</h3><p>Hinta: 9.99 €</p><button onclick="addToCart('Air 1', 9.99)">Add to cart</button></div>
         <div class="card"><img src="https://via.placeholder.com/300x400?text=Air+2" alt="Air 2" /><h3>Air 2</h3><p>Hinta: 14.99 €</p><button onclick="addToCart('Air 2', 14.99)">Add to cart</button></div>
         <div class="card"><img src="https://via.placeholder.com/300x400?text=Air+3" alt="Air 3" /><h3>Air 3</h3><p>Hinta: 19.99 €</p><button onclick="addToCart('Air 3', 19.99)">Add to cart</button></div>
@@ -71,58 +161,115 @@
         <div class="card"><img src="https://via.placeholder.com/300x400?text=Air+14" alt="Air 14" /><h3>Air 14</h3><p>Hinta: 33.99 €</p><button onclick="addToCart('Air 14', 33.99)">Add to cart</button></div>
         <div class="card"><img src="https://via.placeholder.com/300x400?text=Air+15" alt="Air 15" /><h3>Air 15</h3><p>Hinta: 18.99 €</p><button onclick="addToCart('Air 15', 18.99)">Add to cart</button></div>
       </div>
-    </section>
+</section>
 
-    <!-- Cart Section -->
-    <section id="cart" style="display:none;">
-      <h2>Cart</h2>
-      <div class="cart" id="cart-items"></div>
-      <p><strong>Total: <span id="total">0</span> €</strong></p>
-      <p style="color:#000;">No payment options have been added.</p>
-    </section>
+<!-- CART -->
+<section id="cart" style="display:none;">
+  <h2 style="padding:0 2rem;">Cart</h2>
+  <div class="cart" id="cart-items"></div>
+  <p style="padding:0 2rem;"><strong>Total: <span id="total">0</span> €</strong></p>
+  <div style="padding:0 2rem;">
+    <button class="pay-btn" onclick="goToCheckout()">Checkout</button>
   </div>
+</section>
 
-  <footer>
-    <p>© 2026 random store</p>
-  </footer>
+<!-- CHECKOUT -->
+<section id="checkout" style="display:none;">
+  <h2 style="padding:0 2rem;">Checkout</h2>
+  <form class="checkout-form" onsubmit="payNow(event)">
+    <input type="text" placeholder="Name on Card" required>
+    <input type="text" placeholder="Card Number" required>
+    <input type="text" placeholder="MM/YY" required>
+    <input type="text" placeholder="CVV" required>
+    <button class="pay-btn">Pay Now</button>
+  </form>
+</section>
 
-  <script>
-    let cart = [];
+<footer>
+<p>© 2026 Air Store</p>
+</footer>
 
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      renderCart();
-    }
+<script>
+let cart=[];
 
-    function renderCart() {
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = '';
-      let total = 0;
+function addToCart(name,price){
+  const existing=cart.find(i=>i.name===name);
+  if(existing){ existing.qty++; }
+  else{ cart.push({name,price,qty:1}); }
+  renderCart();
+  document.getElementById('store').classList.add('highlight');
+}
 
-      cart.forEach((item, index) => {
-        total += item.price;
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `${item.name} - ${item.price} € <button onclick="removeItem(${index})">Poista</button>`;
-        cartItems.appendChild(div);
-      });
+function renderCart(){
+  const el=document.getElementById('cart-items');
+  el.innerHTML='';
+  let total=0;
+  let count=0;
 
-      document.getElementById('total').innerText = total.toFixed(2);
-    }
+  cart.forEach((item,i)=>{
+    total+=item.price*item.qty;
+    count+=item.qty;
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
+    const div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`
+      <span>${item.name} x ${item.qty} - ${(item.price*item.qty).toFixed(2)} €</span>
+      <div class="qty-controls">
+        <button onclick="decreaseQty(${i})">-</button>
+        <button onclick="increaseQty(${i})">+</button>
+      </div>
+      <button class="remove-btn" onclick="removeItem(${i})">Remove</button>
+    `;
+    el.appendChild(div);
+  });
 
-    function showSection(section) {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('store').style.display = 'none';
-      document.getElementById('cart').style.display = 'none';
+  document.getElementById('total').innerText=total.toFixed(2);
+  document.getElementById('cart-count').innerText=count;
 
-      document.getElementById(section).style.display = 'block';
-    }
-  </script>
+  if(cart.length===0){
+    document.getElementById('store').classList.remove('highlight');
+  }
+}
+
+function removeItem(i){
+  cart.splice(i,1);
+  renderCart();
+}
+
+function increaseQty(i){
+  cart[i].qty++;
+  renderCart();
+}
+
+function decreaseQty(i){
+  if(cart[i].qty>1){ cart[i].qty--; } 
+  else { removeItem(i); }
+  renderCart();
+}
+
+function showSection(s){
+  document.getElementById('home').style.display='none';
+  document.getElementById('store').style.display='none';
+  document.getElementById('cart').style.display='none';
+  document.getElementById('checkout').style.display='none';
+
+  if(s==='home'){ document.getElementById('home').style.display='flex'; }
+  else { document.getElementById(s).style.display='block'; }
+}
+
+function goToCheckout(){
+  if(cart.length===0){ alert("Cart is empty"); return; }
+  showSection('checkout');
+}
+
+function payNow(e){
+  e.preventDefault();
+  alert("Payment successful!");
+  cart=[];
+  renderCart();
+  showSection('home');
+}
+</script>
 
 </body>
 </html>
